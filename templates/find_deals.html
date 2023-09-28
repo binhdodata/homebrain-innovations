@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<header class="home-header">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - HomeBrain Innovations</title>
+    <title>Find Deals - HomeBrain Innovations</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -13,33 +13,31 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/home.html" class="active">Home</a></li>
-                <li><a href="/analysis.html">Analysis</a></li>
-                <li><a href="/find_deals.html">Find Deals</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/analysis">Analysis</a></li>
+                <li><a href="/find_deals" class="active">Find Deals</a></li>
             </ul>
         </nav>
     </header>
-<body>
-    <h1>Find the Best Deals</h1>
-    <nav>
-        <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('analysis') }}">Analysis</a>
-        <a href="{{ url_for('find_deals') }}">Find Deals</a>
-    </nav>
-    <form method="post">
-        <label for="budget">Budget:</label>
-        <input type="text" id="budget" name="budget" required><br>
-        <label for="profit">Profit:</label>
-        <input type="text" id="profit" name="profit" required><br>
-        <input type="submit" value="Find Deals">
-    </form>
-    {% if deals %}
-        <h2>Top 10 Deals:</h2>
-        <ul>
-        {% for deal in deals %}
-            <li>{{ deal.property_name }} - {{ deal.address }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+
+    <main class="deals-container">
+        <h1 class="centered-title">Find the Best Deals in Las Vegas</h1>
+        <form method="post" class="deals-form">
+            <div class="form-group">
+                <label for="budget">Investment Budget:</label>
+                <input type="text" id="budget" name="budget" required>
+            </div>
+                <input type="submit" value="Find Deals" class="submit-btn">
+            </div>
+        </form>
+        {% if deals %}
+            <h2>Top 10 Deals:</h2>
+            <ul class="deals-list">
+            {% for deal in deals %}
+                <li>{{ deal.property_name }} - {{ deal.address }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </main>
 </body>
 </html>

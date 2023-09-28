@@ -13,12 +13,17 @@ def analysis():
 
 @app.route('/find_deals', methods=['GET', 'POST'])
 def find_deals():
+    deals = None  # Initialize deals to None for GET requests
     if request.method == 'POST':
-        budget = request.form['budget']
-        profit = request.form['profit']
-        deals = model.find_deals(budget, profit)  # Assumes find_deals function is defined in model.py
-        return render_template('find_deals.html', deals=deals)
-    return render_template('find_deals.html', deals=None)
+        budget = request.form.get('budget')  # Use .get to avoid KeyError
+        profit = request.form.get('profit')  # Use .get to avoid KeyError
+        if budget and profit:  # Check if budget and profit are provided
+            try:
+                # Assumes find_deals function is defined in model.py and requires budget and profit as float
+                deals = model.find_deals(float(budget), float(profit))  
+            except ValueError:  # Catch ValueError in case of invalid float conversion
+                pass  # You may want to add error handling/logging here
+    return render_template('find_deals.html', deals=deals)
 
 if __name__ == '__main__':
     app.run(debug=True)
