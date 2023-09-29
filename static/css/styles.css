@@ -37,8 +37,10 @@ nav a:hover {
 }
 
 nav a.active {
-    color: #3498db;
-    border-bottom: 2px solid #3498db;
+    padding: 30px;
+   
+    color: #ecf0f1;
+    border-bottom: 2px solid#ecf0f1;
 }
 
 main {
@@ -80,6 +82,9 @@ footer {
     flex: 1;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+
+    
 }
 
 nav ul {
@@ -160,4 +165,45 @@ nav li {
 .centered-title {
     text-align: center;
     margin: 0 auto;
+}
+.analysis-section {
+    padding: 20px;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.findings-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.findings-container h2,
+.findings-container h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.findings-container p,
+.findings-container ul,
+.findings-container ol {
+    margin-bottom: 10px;
+}
+
+.data-image {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    margin-bottom: 20px;
+}
+
+.text-container {
+    padding: 10px;
 }

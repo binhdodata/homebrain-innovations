@@ -14,12 +14,16 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/analysis">Analysis</a></li>
-                <li><a href="/find_deals" class="active">Find Deals</a></li>
+                <li><a href="/analysis" class="active">Analysis</a></li>
+                <li><a href="/find_deals">Find Deals</a></li>
+                <li><a href="/performance_metrics">Performance Metrics</a></li>
+                <li><a href="/feature_importances">Feature Importances</a></li>  <!-- Added this line for the new page -->
             </ul>
         </nav>
     </header>
     {{ deals_table | safe }}
-
+    <footer>
+        <p>&copy; 2023 HomeBrain Innovations</p>
+    </footer>
 </body>
 </html>

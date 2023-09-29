@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Deals - HomeBrain Innovations</title>
+    <title>Analysis - HomeBrain Innovations</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Additional styling for table */
+        .data {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .data th, .data td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .data th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
+
 <body>
     <header class="home-header">
         <div class="logo-container">
@@ -22,27 +39,17 @@
         </nav>
     </header>
 
-    <main class="deals-container">
-        <h1 class="centered-title">Find the Best Deals in Las Vegas</h1>
-        <form method="post" class="deals-form">
-            <div class="form-group">
-                <label for="budget">Investment Budget:</label>
-                <input type="text" id="budget" name="budget" required>
-            </div>
-                <input type="submit" value="Find Deals" class="submit-btn">
-            </div>
-        </form>
-        {% if deals %}
-            <h2>Top 10 Deals:</h2>
-            <ul class="deals-list">
-            {% for deal in deals %}
-                <li>{{ deal.property_name }} - {{ deal.address }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
+    <main>
+        <section class="analysis-section">
+            <h1 class="centered-title">Feature Importances</h1>
+            {{ graph | safe }}
+        </section>
     </main>
+    
     <footer>
         <p>&copy; 2023 HomeBrain Innovations</p>
     </footer>
+
 </body>
+
 </html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<header class="home-header">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - HomeBrain Innovations</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
     <header class="home-header">
         <div class="logo-container">
@@ -13,9 +15,70 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/analysis">Analysis</a></li>
-                <li><a href="/find_deals">Find Deals</a></li>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/analysis" class="active">Analysis</a></li>
+                <li><a href="/find_deals" class="active">Find Deals</a></li>
+                <li><a href="/performance_metrics" class="active">Performance Metrics</a></li>
+                <li><a href="/feature_importances" class="active">Feature Importances</a></li>  <!-- Added this line for the new page -->
             </ul>
         </nav>
     </header>
+
+    <div class="content">
+        <div class="image-container">
+            <img src="/static/images/heatmap.png" alt="Heatmap" class="data-image">
+        </div>
+        <div class="text-container">
+            <h2>Findings from the Correlation Heatmap</h2>
+            <p>The correlation heatmap visually represents the relationships between different features in the dataset.</p>
+            <ol>
+                <li><strong>Positive correlations:</strong>
+                    <ul>
+                        <li>'Price' has a strong positive correlation with 'Baths' and 'Sq Ft', indicating that as these values increase, the price tends to increase as well.</li>
+                        <li>'Beds' also show a positive correlation with 'Price', although slightly weaker than 'Baths' and 'Sq Ft'.</li>
+                        <li>'Garage Spaces' have a moderate positive correlation with 'Price'.</li>
+                    </ul>
+                </li>
+                <li><strong>Negative correlations:</strong>
+                    <ul>
+                        <li>'Walk Score (out of 100)' and 'Transit Score (out of 100)' have negative correlations with 'Price', suggesting that higher walk and transit scores are associated with lower prices.</li>
+                        <li>'Year Built' has a negative correlation with 'Price', indicating that older properties tend to have lower prices.</li>
+                    </ul>
+                </li>
+                <li><strong>Other observations:</strong>
+                    <ul>
+                        <li>There are no strong correlations between 'Price' and 'Elementary School Score', 'Middle School Score', or 'High School Score'.</li>
+                        <li>Features such as 'Lot Size', 'Tax Amount', and 'HOA Dues' do not show strong correlations with 'Price'.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>This information can be valuable when selecting features for a predictive model or understanding the factors that influence property prices.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="/static/images/scatterplot.png" alt="Scatterplot" class="data-image">
+        </div>
+        <div class="text-container">
+            <h2>Interpretation of the Scatterplot</h2>
+            <p>The scatterplot displays the relationship between 'Price' and 'Sq Ft' while distinguishing data points by the number of 'Beds' using colors. Each point on the plot represents a property in the dataset.</p>
+            <h3>Key Findings:</h3>
+            <ul>
+                <li>The x-axis represents 'Price', and the y-axis represents 'Sq Ft' (square footage of the property).</li>
+                <li>The color of each point indicates the number of bedrooms ('Beds') in the property.</li>
+            </ul>
+            <h3>Observations:</h3>
+            <ul>
+                <li>There is a general trend of properties with larger square footage ('Sq Ft') having higher prices ('Price').</li>
+                <li>The majority of properties with 2 to 4 bedrooms ('Beds') fall within the lower to mid-price range.</li>
+                <li>Some outliers can be observed, where properties with a relatively smaller square footage have higher prices, possibly due to other factors like location or amenities.</li>
+                <li>There is a mix of property prices within each bedroom category, indicating that the number of bedrooms alone does not determine the price.</li>
+            </ul>
+            <p>Overall, this scatterplot helps us understand the relationship between price, square footage, and the number of bedrooms, providing insights into how these factors interact in determining property prices.</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 HomeBrain Innovations</p>
+    </footer>
+</body>
+
+</html>

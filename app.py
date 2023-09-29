@@ -4,6 +4,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import json
+import plotly.express as px
+import plotly.io as pio
 
 app = Flask(__name__)
 
@@ -12,6 +16,7 @@ model = None
 imputer = None
 training_data = None
 original_data = None  # Define original_data here
+metrics = None
 
 def train_model():
     global model, imputer, training_data, original_data
@@ -38,14 +43,54 @@ def train_model():
 
     model = RandomForestRegressor(n_estimators=100, random_state=42)
     model.fit(X_train_imputed, y_train)
+    
+    #apply metrics
+    X_test_imputed = imputer.transform(X_test)
+    y_pred = model.predict(X_test_imputed)
+
+    mae = mean_absolute_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = mean_squared_error(y_test, y_pred, squared=False)
+    r2 = r2_score(y_test, y_pred)
+
+    # Store metrics in a dictionary for easy access
+    metrics = {
+        "MAE": mae,
+        "MSE": mse,
+        "RMSE": rmse,
+        "R2": r2
+    }
+
+    # Write metrics to a file
+    with open('metrics.json', 'w') as f:
+        json.dump(metrics, f)
+
+    model.fit(X_train_imputed, y_train)
+    
+    # Feature importances
+    feature_importances = model.feature_importances_
+    feature_importances_dict = dict(zip(X_encoded.columns, feature_importances))
+
+    # Sort features based on importance
+    sorted_feature_importances = dict(sorted(feature_importances_dict.items(), key=lambda item: item[1], reverse=True))
+
+    # Write feature importances to a file
+    with open('feature_importances.json', 'w') as f:
+        json.dump(sorted_feature_importances, f)
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/analysis')
-def analysis():
-    return render_template('analysis.html')
+@app.route('/performance_metrics')
+def performance_metrics():
+    try:
+        # Read metrics from a file
+        with open('metrics.json', 'r') as f:
+            metrics = json.load(f)
+        return render_template('performance_metrics.html', mae=metrics["MAE"], mse=metrics["MSE"], rmse=metrics["RMSE"], r2=metrics["R2"])
+    except FileNotFoundError:
+        return "Metrics not available. Please train the model first."
 
 drop_cols = ['URL', 'Elementary School Name', 'Middle School Name', 'High School Name', 
              'Address', 'Property Type', 'Style', 'Floor Type', 'Heat Type', 'Cool Type',
@@ -90,6 +135,33 @@ def find_deals():
         return render_template('results.html', deals_table=deals_html_table)
     
     return render_template('find_deals.html')
+@app.route('/analysis')
+def analysis():
+    return render_template('analysis.html')
+# Generate the paths to your heatmap and scatterplot images
+    heatmap_image_path = 'static/images/heatmap.png'
+    scatterplot_image_path = 'static/images/scatterplot.png'
+
+    # Render the 'analysis.html' template and pass the image paths to it
+    return render_template('analysis.html', heatmap_image=heatmap_image_path, scatterplot_image=scatterplot_image_path)
+@app.route('/feature_importances')
+def feature_importances():
+    global model, training_data  # ensure you have access to model and training_data
+    importances = model.feature_importances_
+    features = training_data.columns.tolist()
+    importances_df = pd.DataFrame({
+        'Feature': features,
+        'Importance': importances
+    })
+    importances_df = importances_df.sort_values(by='Importance', ascending=False).head(14)
+    
+    # Generate Plot
+    fig = px.bar(importances_df, x='Importance', y='Feature', orientation='h', title='Feature Importances')
+    
+    # Convert Plot to HTML
+    graph_html = pio.to_html(fig, full_html=False)
+    
+    return render_template('feature_importances.html', graph=graph_html)
 
 if __name__ == '__main__':
     train_model()
