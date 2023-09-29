@@ -122,16 +122,19 @@ def find_deals():
         
         predicted_prices = model.predict(new_data_imputed)
         new_data['Predicted Price'] = predicted_prices
-        new_data['Price Difference'] = new_data['Price'] - new_data['Predicted Price']
-        good_deals = new_data[new_data['Price Difference'] < 0]
+        new_data['Price Difference'] = (new_data['Predicted Price'] - new_data['Price'])  # Adjusted formula for positive difference
+        good_deals = new_data[new_data['Price Difference'] > 0]  # Adjusted condition for positive difference
         affordable_good_deals = good_deals[good_deals['Price'] <= budget]
+        affordable_good_deals = affordable_good_deals[['URL', 'Address', 'Price', 'Beds', 'Baths', 'Sq Ft', 'Predicted Price', 'Price Difference']]
+        affordable_good_deals = affordable_good_deals.sort_values(by='Price Difference', ascending=False)  # Sorted by most positive difference first
         
-
+        format_price = lambda x: '${:,.0f}'.format(x)
+        affordable_good_deals['Price'] = affordable_good_deals['Price'].apply(format_price)
+        affordable_good_deals['Predicted Price'] = affordable_good_deals['Predicted Price'].apply(format_price)
+        affordable_good_deals['Price Difference'] = affordable_good_deals['Price Difference'].apply(format_price)
         
-
-
-
-        deals_html_table = affordable_good_deals.to_html(classes='data', header="true", index=False)
+        affordable_good_deals['URL'] = affordable_good_deals['URL'].apply(lambda x: f'<a href="{x}" target="_blank">{x}</a>')
+        deals_html_table = affordable_good_deals.to_html(classes='data', header="true", index=False, escape=False)
         return render_template('results.html', deals_table=deals_html_table)
     
     return render_template('find_deals.html')

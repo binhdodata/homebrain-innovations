@@ -23,23 +23,16 @@
     </header>
 
     <main class="deals-container">
-        <h1 class="centered-title">Find the Best Deals in Las Vegas</h1>
+        <h1 class="centered-title colored-text">Find the Best Deals in Las Vegas</h1>
         <form method="post" class="deals-form">
             <div class="form-group">
-                <label for="budget">Investment Budget:</label>
+                <label for="budget" class="colored-text">Investment Budget:</label>
                 <input type="text" id="budget" name="budget" required>
             </div>
-                <input type="submit" value="Find Deals" class="submit-btn">
-            </div>
+            <input type="submit" value="Find Deals" class="submit-btn colored-text">
         </form>
-        {% if deals %}
-            <h2>Top 10 Deals:</h2>
-            <ul class="deals-list">
-            {% for deal in deals %}
-                <li>{{ deal.property_name }} - {{ deal.address }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
+    </main>
+        
     </main>
     <footer>
         <p>&copy; 2023 HomeBrain Innovations</p>
