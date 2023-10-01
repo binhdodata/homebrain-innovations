@@ -34,7 +34,7 @@
                 <li><a href="/analysis" class="active">Analysis</a></li>
                 <li><a href="/find_deals" class="active">Find Deals</a></li>
                 <li><a href="/performance_metrics" class="active">Metrics</a></li>
-                <li><a href="/feature_importances" class="active">Features</a></li>  <!-- Added this line for the new page -->
+                <li><a href="/feature_importances" class="active">Features</a></li>
             </ul>
         </nav>
     </header>
@@ -43,6 +43,13 @@
         <section class="analysis-section">
             <h1 class="centered-title">Feature Importances</h1>
             {{ graph | safe }}
+        </section>
+        <section class="analysis-section">
+            <h1 class="centered-title">Model Performance Metrics</h1>
+            <p>Mean Absolute Error: {{ mae }}</p>
+            <p>Mean Squared Error: {{ mse }}</p>
+            <p>Root Mean Squared Error: {{ rmse }}</p>
+            <p>R-squared: {{ r2 }}</p>
         </section>
     </main>
     
