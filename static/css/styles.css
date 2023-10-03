@@ -26,11 +26,7 @@ nav li {
     margin: 0 15px;
 }
 
-nav a {
-    text-decoration: none;
-    color: #ecf0f1;
-    transition: color 0.3s ease-in-out;
-}
+
 
 nav a:hover {
     color: #3498db;
@@ -38,8 +34,11 @@ nav a:hover {
 
 nav a.active {
     font-size: 1.25em; 
-    color: #090e0f;
-    border-bottom: 1px solid#ecf0f1;
+    color: #ecf0f1;
+    background-color: #3498db;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
 }
 
 main {
@@ -86,13 +85,7 @@ footer {
     
 }
 
-nav ul {
-    flex: 1;
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-}
+
 
 nav li {
     margin: 0 15px;
@@ -249,7 +242,7 @@ body {
     position: relative;
     background-image: url('/static/images/lasvegas.jpg');
     background-size: 50;
-    background-position: 30% center;
+    background-position: 18% center;
     text-align: center;
     height: 300px; /* adjust this value to get the desired header height */
 }
@@ -263,26 +256,130 @@ body {
     max-width: 100%; /* optional: this will ensure the logo scales down on smaller screens */
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.8); /* optional: this creates a semi-transparent background for the nav */
-}
 
-nav li {
-    display: inline;
-    margin-right: 10px;
-}
 
 nav a {
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    color: #ecf0f1;
+    transition: color 0.3s ease-in-out;
 }
+
+
 
 .header-images img {
     display: none; /* this will hide the extra image tag */
+}
+
+/* Basic resets and typography */
+html, body, div, h1, h2, h3, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.home-header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.home-header img {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+
+
+.home-header nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.home-header nav a:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+/* Main Content */
+.analysis-section {
+    background-color: white;
+    padding: 40px 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.centered-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333;
+}
+
+.findings-container {
+    margin-top: 30px;
+}
+
+.findings-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.findings-container h3 {
+    font-size: 1.2em;
+    margin-top: 20px;
+    color: #3498db;
+}
+
+.findings-container p {
+    margin-bottom: 20px;
+    font-size: 1em;
+    line-height: 1.8;
+}
+
+.colored-text {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.image-container {
+    text-align: center;
+}
+
+.data-image {
+    max-width: 80%;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    font-size: 0.9em;
 }
