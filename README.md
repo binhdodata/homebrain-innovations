@@ -1,4 +1,5 @@
 HomeBrain Property Price Predictor 🏡
+
 Overview
 HomeBrain is a property price predictor application built with Flask, which leverages the RandomForest Regressor to estimate property prices and assist users in discovering properties listed below their market value. This project was undertaken as part of the Berkeley Extension Data BootCamp, with a dedicated team working over two weeks to bring this idea to life.
 
@@ -10,26 +11,20 @@ Price Prediction: Utilizes a RandomForest Regressor to predict property prices b
 Deal Finder: Assists users in finding properties that are potentially undervalued.
 Data Visualizations: Interactive graphs and charts that offer insights into property trends.
 Performance Metrics: Displays metrics such as MAE, MSE, RMSE, and R^2 to provide transparency into the model's accuracy and performance.
+
 Setup and Installation ⚙️
+
 Clone the repository:
-
-sh
-Copy code
 git clone https://github.com/binhdodata/homebrain-innovations.git
+
 Navigate to the project directory:
-
-sh
-Copy code
 cd homebrain-innovations
+
 Install the required Python packages:
-
-sh
-Copy code
 pip install -r requirements.txt
-Run the application:
 
-sh
-Copy code
+
+Run the application:
 python app.py
 The application should now be running on http://127.0.0.1:5000/.
 
