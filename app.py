@@ -13,19 +13,16 @@ import plotly.io as pio
 import sqlite3
 from sqlalchemy import create_engine
 
-data = pd.read_csv('static/csv/Sold.csv')
-
-conn = sqlite3.connect('real_estate_data.db')
-data.to_sql('sold_properties', conn, if_exists='replace', index=False)
-app = Flask(__name__)
-
 # Global variables to store the model and transformer
 model = None
 preprocessor = None
 metrics = None
 Training_data = None
 original_data = None
-
+data = pd.read_csv('static/csv/Sold.csv')
+conn = sqlite3.connect('real_estate_data.db')
+data.to_sql('sold_properties', conn, if_exists='replace', index=False)
+app = Flask(__name__)
 drop_cols = ['URL', 'Address', 'Property Type', 'Full Address', 'Price']
 
 def clean_hoa(hoa_str):
@@ -65,6 +62,17 @@ def train_model():
         for col in numerical_cols:
             data[col] = data[col].apply(clean_numerical)
         categorical_cols = [
+            'URL',
+            'Address',
+            'Property Type',
+            'Has Pool',
+            'Has Patio',
+            'Flood Factor',
+            'Fire Factor',
+            'Heat Factor',
+            'Wind Factor',
+            'Full Address'
+
         ]
         X = data[numerical_cols + categorical_cols]
         y = data['Price']
@@ -116,6 +124,10 @@ def train_model():
     except Exception as e:
         print(f"Error in train_model: {e}")
 
+def get_feature_names(column_transformer):
+    return column_transformer.get_feature_names_out()
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -154,7 +166,6 @@ def find_deals():
         new_data_encoded = pd.get_dummies(new_data_prep)
         
         # Replace this line with the modified line below
-        # new_data_encoded, _ = new_data_encoded.align(training_data, axis=1, fill_value=0)
         new_data_encoded, _ = new_data_encoded.align(Training_data, axis=1, fill_value=0)  # Modified line
 
         # Ensure the order of columns matches the training data
@@ -190,19 +201,6 @@ def analysis():
     heatmap_image_path = 'static/images/heatmap.png'
     scatterplot_image_path = 'static/images/scatterplot.png'
     return render_template('analysis.html', heatmap_image=heatmap_image_path, scatterplot_image=scatterplot_image_path)
-
-def get_feature_names(column_transformer):
-    feature_names = []
-    for transformer_info in column_transformer.transformers_:
-        transformer_name, transformer, columns = transformer_info
-        if isinstance(transformer, OneHotEncoder):
-            transformed_features = transformer.get_feature_names_out(columns)
-            feature_names.extend(transformed_features)
-        elif transformer == 'passthrough':
-            feature_names.extend(columns)
-        else:
-            feature_names.extend(columns)
-    return feature_names
 
 @app.route('/feature_importances')
 def feature_importances():
