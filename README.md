@@ -1,70 +1,76 @@
-HomeBrain Property Price Predictor 🏡
+# HomeBrain: Property Price Predictor 🏡
 
-Overview
-HomeBrain is a property price predictor application built with Flask, which leverages the RandomForest Regressor to estimate property prices and assist users in discovering properties listed below their market value. This project was undertaken as part of the Berkeley Extension Data BootCamp, with a dedicated team working over two weeks to bring this idea to life.
+HomeBrain is a state-of-the-art property price predictor built on Flask, harnessing the power of RandomForest Regressor. Developed as part of the Berkeley Extension Data BootCamp, our dedicated team put in rigorous effort over two weeks to realize this innovative concept.
 
-Application Screenshot
-Replace the above link with a screenshot of your application for a visual overview.
 
-Features 🌟
-Price Prediction: Utilizes a RandomForest Regressor to predict property prices based on historical data.
-Deal Finder: Assists users in finding properties that are potentially undervalued.
-Data Visualizations: Interactive graphs and charts that offer insights into property trends.
-Performance Metrics: Displays metrics such as MAE, MSE, RMSE, and R^2 to provide transparency into the model's accuracy and performance.
+## Key Features 🌟
 
-Features
+- **Price Prediction**: Employs `RandomForestRegressor` to make property price predictions, trained on the `Sold.csv` dataset.
+  
+- **Deal Finder**: Aids users in spotting potentially undervalued properties.
+  
+- **Data Visualizations**: Dynamic graphs and charts showcasing property market trends.
+  
+- **Performance Metrics**: Transparency into the model's effectiveness with metrics such as MAE, MSE, RMSE, and R^2.
+  
+- **Feature Insights**: Understand which property features significantly influence predictions.
+  
+- **Property Scraper**: Efficiently pulls property data from websites, storing them in a CSV format.
 
-1. **Train Model**: Uses a `RandomForestRegressor` model to predict property prices based on various features. The model is trained on data from a `Sold.csv` file.
-2. **Performance Metrics**: Displays metrics like MAE, MSE, RMSE, and R² to show how well the model performs.
-3. **Find Deals**: Helps users find property listings that are potential good deals based on the trained model and a user-defined budget.
-4. **Analysis**: Visualizes correlations among different property features.
-5. **Feature Importances**: Shows which features are most influential in the model's predictions.
-6. **Property Scraper**: Gathers data from property listings on websites and saves it to a CSV file.
+## Technical Aspects 🛠
 
-## Technical Details
+### Utilized Technologies:
 
-### Technologies and Libraries Used:
+- **Flask**: Powers the backend and the web application framework.
+  
+- **Pandas**: Facilitates data analysis and manipulation.
+  
+- **Scikit-learn**: Takes care of data preprocessing and the machine learning model.
+  
+- **Plotly**: For vivid data visualization.
+  
+- **BeautifulSoup**: Enables web scraping functionalities.
 
-- Flask: Used for backend and web application.
-- Pandas: Data manipulation and analysis.
-- Scikit-learn: Data preprocessing and machine learning model.
-- Plotly: Data visualization.
-- BeautifulSoup: Web scraping.
-
-### Key Components:
+### Core Components:
 
 1. **Data Preprocessing**:
-    - Cleaning functions to handle special characters in price and numerical data.
-    - Functions to preprocess and encode data using `OneHotEncoder`.
-    
-2. **Model Training**:
-    - Utilizes `RandomForestRegressor` for the prediction model.
-    - Employs `Pipeline` and `ColumnTransformer` for streamlined preprocessing and model fitting.
-    
-3. **Web Application Endpoints**:
-    - `/`: Homepage.
-    - `/performance_metrics`: Shows model performance metrics.
-    - `/find_deals`: Helps users find potential property deals.
-    - `/analysis`: Displays property feature analysis.
-    - `/feature_importances`: Visualizes feature importances from the model.
-    
-4. **Web Scraping**:
-    - Uses `requests` and `BeautifulSoup` to scrape property data from web pages.
-    - Extracts details like property name, address, price, square footage, number of beds/baths, property type, and year built.
-    - Saves scraped data to a CSV file.
-      
-Dataset 📊
-The data used for training the model is derived from a real estate CSV file which includes features like Walk Score, Transit Score, Bike Score, School Scores, Beds, Baths, Square footage, and more.
+    - Special character handling in price and other numerical fields.
+    - Streamlined preprocessing and encoding with `OneHotEncoder`.
 
-Team 👥
-Binh Do: Team Leader, Backend Developer, Machine Learning Engineer
-Beenish: Data Analyst
-Nasr: Frontend Backend Analyst
-Joy: Data Analyst 
-Include brief descriptions or roles if you'd like.
+2. **Model Mechanics**:
+    - The heart is the `RandomForestRegressor`.
+    - Seamless integration of `Pipeline` and `ColumnTransformer` for preprocessing and model fitting.
 
-Acknowledgments 🙏
-A huge shoutout to our mentors at Berkeley Extension Data BootCamp for their guidance and support throughout this project's duration.
+3. **Web Endpoints**:
+    - `/`: The landing page.
+    - `/performance_metrics`: A peek into model performance.
+    - `/find_deals`: Spot exciting property deals.
+    - `/analysis`: Deep dive into property feature interrelations.
+    - `/feature_importances`: A visual treat of feature significance.
 
-Contributing and Feedback 🤝
-Contributions, feedback, and suggestions are welcome! Open an issue or submit a pull request.
+4. **Web Data Collection**:
+    - Leveraging `requests` and `BeautifulSoup` for web data extraction.
+    - Details such as property name, address, price, square footage, and more are extracted and stored.
+
+## Dataset Insights 📊
+
+Training is based on a comprehensive real estate dataset comprising features such as Walk Score, Transit Score, Bike Score, School Scores, and typical property characteristics like Beds, Baths, and Square footage.
+
+## Meet the Team 👥
+
+- **Binh Do**: The visionary Team Leader, Backend Developer, and Machine Learning Engineer.
+  
+- **Beenish**: The insightful Data Analyst.
+  
+- **Nasr**: Our Frontend and Backend Analyst maestro.
+  
+- **Joy**: Another brilliant Data Analyst.
+
+## Acknowledgments 🙏
+
+Boundless gratitude to our mentors at Berkeley Extension Data BootCamp. Their unwavering guidance ensured this project's success.
+
+## Contributions & Feedback 🤝
+
+We value your thoughts! Feel free to raise issues or pitch in with a pull request.
+   
