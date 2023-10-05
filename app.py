@@ -10,7 +10,13 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import json
 import plotly.express as px
 import plotly.io as pio
+import sqlite3
+from sqlalchemy import create_engine
 
+data = pd.read_csv('static/csv/Sold.csv')
+
+conn = sqlite3.connect('real_estate_data.db')
+data.to_sql('sold_properties', conn, if_exists='replace', index=False)
 app = Flask(__name__)
 
 # Global variables to store the model and transformer
@@ -47,7 +53,8 @@ def preprocess_data(train_data, new_data):
 def train_model():
     global model, preprocessor, metrics, Training_data, original_data
     try:
-        data = pd.read_csv('static/csv/Sold.csv')
+        engine = create_engine('sqlite:///real_estate_data.db')
+        data = pd.read_sql('SELECT * FROM sold_properties', engine)
         data['Price'] = data['Price'].apply(clean_price)
         data['HOA Dues'] = data['HOA Dues'].apply(clean_hoa)
         numerical_cols = ['Walk Score (out of 100)', 'Transit Score (out of 100)', 'Bike Score (out of 100)',
@@ -58,7 +65,6 @@ def train_model():
         for col in numerical_cols:
             data[col] = data[col].apply(clean_numerical)
         categorical_cols = [
-            # ... rest of your categorical columns ...
         ]
         X = data[numerical_cols + categorical_cols]
         y = data['Price']
